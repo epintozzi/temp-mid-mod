@@ -7,3 +7,22 @@
 <% else %>
   <%= link_to "Login", login_path %>
 <% end %>
+
+<div class="">
+  <%= form_for @link do |f| %>
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.submit "Submit Link" %>
+  <% end %>
+</div>
+
+<% if current_user %>
+  <h4>All your links</h4>
+
+  <% @links.each do |link| %>
+    <h5><%= link.title %></h5>
+    <%= link.url %></br>
+  <% end %>
+<% end %>
