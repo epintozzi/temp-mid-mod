@@ -9,10 +9,11 @@ describe "user sign up" do
     fill_in "user[email]", with: "erin@email.com"
     fill_in "user[password]", with: "password1"
     fill_in "user[password_confirmation]", with: "password1"
+    click_on "Create User"
 
     expect(page).to have_content("You have successfully created an account")
   end
-  xscenario "user cannot create an account with email address that is already in use" do
+  scenario "user cannot create an account with email address that is already in use" do
     user = User.create(email: "erin@email.com", password: "password", password_confirmation: "password")
     visit root_path
     click_on "Sign Up"
@@ -21,10 +22,11 @@ describe "user sign up" do
     fill_in "user[email]", with: "erin@email.com"
     fill_in "user[password]", with: "password1"
     fill_in "user[password_confirmation]", with: "password1"
+    click_on "Create User"
 
-    expect(page).to have_content("Email address is already in use. Please log in or try again.")
+    expect(page).to have_content("There was a problem. Email has already been taken. Please try again.")
   end
-  xscenario "user must having matching passwords" do
+  scenario "user must having matching passwords" do
     visit root_path
     click_on "Sign Up"
 
@@ -32,37 +34,41 @@ describe "user sign up" do
     fill_in "user[email]", with: "erin@email.com"
     fill_in "user[password]", with: "password1"
     fill_in "user[password_confirmation]", with: "password"
+    click_on "Create User"
 
-    expect(page).to have_content("Passwords do not match. Please try again")
+    expect(page).to have_content("There was a problem. Password confirmation doesn't match Password")
   end
-  xscenario "email cannot be blank" do
+  scenario "email cannot be blank" do
     visit root_path
     click_on "Sign Up"
 
     expect(current_path).to eq(new_user_path)
-    fill_in "user[password]", with: "password1"
+    fill_in "user[password]", with: "password"
     fill_in "user[password_confirmation]", with: "password"
+    click_on "Create User"
 
-    expect(page).to have_content("Email cannot be blank.")
+    expect(page).to have_content("There was a problem. Email can't be blank. Please try again.")
   end
-  xscenario "password cannot be blank" do
+  scenario "password cannot be blank" do
     visit root_path
     click_on "Sign Up"
 
     expect(current_path).to eq(new_user_path)
     fill_in "user[email]", with: "erin@email.com"
     fill_in "user[password_confirmation]", with: "password"
+    click_on "Create User"
 
-    expect(page).to have_content("Password cannot be blank.")
+    expect(page).to have_content("Password confirmation doesn't match Password")
   end
-  xscenario "password confirmation cannot be blank" do
+  scenario "password confirmation cannot be blank" do
     visit root_path
     click_on "Sign Up"
 
     expect(current_path).to eq(new_user_path)
     fill_in "user[email]", with: "erin@email.com"
     fill_in "user[password]", with: "password1"
+    click_on "Create User"
 
-    expect(page).to have_content("Password Confirmation cannot be blank.")
+    expect(page).to have_content("Password confirmation doesn't match Password")
   end
 end
