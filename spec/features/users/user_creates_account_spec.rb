@@ -14,7 +14,7 @@ describe "user sign up" do
     expect(page).to have_content("You have successfully created an account")
   end
   scenario "user cannot create an account with email address that is already in use" do
-    user = User.create(email: "erin@email.com", password: "password", password_confirmation: "password")
+    User.create(email: "erin@email.com", password: "password", password_confirmation: "password")
     visit root_path
     click_on "Sign Up"
 
