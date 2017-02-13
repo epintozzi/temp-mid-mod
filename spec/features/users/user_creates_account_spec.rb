@@ -71,4 +71,16 @@ describe "user sign up" do
 
     expect(page).to have_content("Password confirmation doesn't match Password")
   end
+  xscenario "user is logged in upon successful account creation" do
+    visit root_path
+    click_on "Sign Up"
+
+    expect(current_path).to eq(new_user_path)
+    fill_in "user[email]", with: "erin@email.com"
+    fill_in "user[password]", with: "password1"
+    fill_in "user[password_confirmation]", with: "password1"
+    click_on "Create User"
+
+    expect(user).to be(current_user)
+  end
 end
