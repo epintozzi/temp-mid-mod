@@ -71,4 +71,20 @@ describe "user sign up" do
 
     expect(page).to have_content("Password confirmation doesn't match Password")
   end
+  scenario "user is logged in upon successful account creation" do
+    visit root_path
+    click_on "Sign Up"
+
+    expect(current_path).to eq(new_user_path)
+    fill_in "user[email]", with: "erin@email.com"
+    fill_in "user[password]", with: "password1"
+    fill_in "user[password_confirmation]", with: "password1"
+    click_on "Create User"
+
+    user = User.last
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    expect(page).to have_content("Log out")
+    expect(page).to_not have_content("Login")
+  end
 end
