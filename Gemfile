@@ -16,6 +16,7 @@ gem 'awesome_print'
 gem 'sprockets-es6'
 gem 'bcrypt', '~> 3.1.7'
 gem "validate_url"
+gem "bunny", ">= 2.6.3"
 
 # gem 'unicorn'
 
