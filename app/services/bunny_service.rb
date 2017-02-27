@@ -11,7 +11,7 @@ class BunnyService
     )
     connection.start
     channel = connection.create_channel
-    @send_read = channel.queue("read.link")
+    @send_read = channel.queue("ep.read.link")
   end
 
   def send_link(link)

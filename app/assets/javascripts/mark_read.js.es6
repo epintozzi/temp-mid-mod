@@ -17,7 +17,7 @@ function markAsRead(e) {
 }
 
 function updateLinkStatus(link) {
-  $(`.link[data-link-id=${link.id}]`).find(".read-status").text(link.read);
+  $(`.link[data-link-id=${link.id}]`).find(".read-status").text("Read Status:" + link.read);
   $(`.link[data-link-id=${link.id}]`).find("a.mark-as-read").hide();
 }
 
